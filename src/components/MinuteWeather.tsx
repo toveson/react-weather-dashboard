@@ -51,8 +51,6 @@ export const MinuteWeather: React.FC = () => {
     }
   }, [currentWeatherData])
 
-  console.log(minuteData)
-
   const labels = minuteData.map((data) => {
     const dt = new Date(data.dt * 1000)
     return dt.toLocaleTimeString() // Customize the label format as needed

@@ -1,7 +1,11 @@
 import {createContext, ReactNode, useState} from "react"
 
+interface currentWeatherDataType {
+  minutely: Array<object>
+}
+
 interface WeatherContextType {
-  currentWeatherData: undefined
+  currentWeatherData: undefined | currentWeatherDataType
   setCurrentWeatherData: React.Dispatch<React.SetStateAction<undefined>>
 }
 

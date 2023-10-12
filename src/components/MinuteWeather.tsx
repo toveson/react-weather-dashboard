@@ -1,9 +1,16 @@
-import {useContext} from "react"
+import {useContext, useEffect, useState} from "react"
 import WeatherContext from "../WeatherContext"
 
-export const MinuteWeather: React.FC = (props) => {
+export const MinuteWeather: React.FC = () => {
   const {currentWeatherData} = useContext(WeatherContext)
+  const [minuteData, setMinuteData] = useState<object[]>([])
 
-  console.log(currentWeatherData)
-  return <>{JSON.stringify(currentWeatherData)}</>
+  useEffect(() => {
+    if (currentWeatherData !== undefined) {
+      setMinuteData(currentWeatherData?.minutely)
+    }
+  }, [currentWeatherData])
+
+  console.log(minuteData)
+  return <>{JSON.stringify(minuteData)}</>
 }

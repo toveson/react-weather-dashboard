@@ -16,16 +16,18 @@ export const Search: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue},&limit=5&appid=${openWeatherKey}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length === 1) {
-          setLat(data[0].lat)
-          setLon(data[0].lon)
-        }
-      })
+    if (searchValue !== "") {
+      fetch(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue},&limit=5&appid=${openWeatherKey}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length === 1) {
+            setLat(data[0].lat)
+            setLon(data[0].lon)
+          }
+        })
+    }
   }, [searchValue, openWeatherKey])
 
   const fetchWeatherData = () => {

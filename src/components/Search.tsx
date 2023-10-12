@@ -83,7 +83,7 @@ export const Search: React.FC = () => {
       </Stack>
       <Stack spacing={1}>
         {existingArray.map((city: string, index: number) => (
-          <Stack direction="row">
+          <Stack direction="row" key={index}>
             <Button
               fullWidth
               key={index}

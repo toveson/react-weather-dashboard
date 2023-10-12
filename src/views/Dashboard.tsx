@@ -1,6 +1,6 @@
 import {
-  CurrentWeather,
-  ForecastWeather,
+  // CurrentWeather,
+  // ForecastWeather,
   MinuteWeather,
   Search
 } from "../components"
@@ -20,8 +20,8 @@ export const Dashboard: React.FC = (props) => {
       }}
     >
       <Search />
-      <CurrentWeather />
-      <ForecastWeather />
+      {/* <CurrentWeather /> */}
+      {/* <ForecastWeather /> */}
       <MinuteWeather />
     </div>
   )

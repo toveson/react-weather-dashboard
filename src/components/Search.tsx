@@ -1,9 +1,11 @@
 import {Button, IconButton, Stack, TextField} from "@mui/material"
-import {useEffect, useState} from "react"
+import {useContext, useEffect, useState} from "react"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import SearchIcon from "@mui/icons-material/Search"
+import WeatherContext from "../WeatherContext"
 
 export const Search: React.FC = () => {
+  const {setCurrentWeatherData} = useContext(WeatherContext)
   const [searchValue, setSearchValue] = useState<string>("")
   const [lat, setLat] = useState<number>(0)
   const [lon, setLon] = useState<number>(0)
@@ -47,7 +49,7 @@ export const Search: React.FC = () => {
 
           localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
         }
-        console.log(data)
+        setCurrentWeatherData(data)
       })
       .then(() => setSearchValue(""))
   }

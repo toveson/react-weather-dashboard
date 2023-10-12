@@ -1,4 +1,9 @@
-import {Search} from "../components"
+import {
+  CurrentWeather,
+  ForecastWeather,
+  MinuteWeather,
+  Search
+} from "../components"
 
 export const Dashboard: React.FC = (props) => {
   return (
@@ -10,10 +15,14 @@ export const Dashboard: React.FC = (props) => {
         alignItems: "center",
         // backgroundColor: "#69DC9E",
         overflow: "auto",
-        padding: "0"
+        padding: "0",
+        flexWrap: "wrap"
       }}
     >
       <Search />
+      <CurrentWeather />
+      <ForecastWeather />
+      <MinuteWeather />
     </div>
   )
 }

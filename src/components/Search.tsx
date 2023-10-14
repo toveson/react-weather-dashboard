@@ -57,7 +57,7 @@ export const Search: React.FC = () => {
   const handleDeleteButtonClick = (city: string) => {
     const filteredArray = existingArray.filter((value: any) => value !== city)
     localStorage.setItem("searchedCities", JSON.stringify(filteredArray))
-    window.location.reload() // Refresh the component to reflect the changes
+    window.location.reload()
   }
 
   const handleCityButtonClick = (city: string) => {

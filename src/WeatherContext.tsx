@@ -1,6 +1,7 @@
 import {createContext, ReactNode, useState} from "react"
 
 interface currentWeatherDataType {
+  current: object
   minutely: Array<object>
 }
 

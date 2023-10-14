@@ -1,7 +1,6 @@
 import {Stack} from "@mui/system"
 import {
   CurrentWeather,
-  // CurrentWeather,
   // ForecastWeather,
   MinuteWeather,
   Search
@@ -12,25 +11,26 @@ import WeatherContext from "../WeatherContext"
 export const Dashboard: React.FC = (props) => {
   const {currentWeatherData} = useContext(WeatherContext)
   return (
-    <div
+    <Stack
+      padding={2}
       style={{
-        display: "flex",
         justifyContent: "center",
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-        // backgroundColor: "#69DC9E",
-        overflow: "auto",
-        padding: "0",
-        flexWrap: "wrap"
+        backgroundColor: "#69DC9E",
+        height: "100%"
       }}
     >
-      <Stack>
-        <Search />
-        <CurrentWeather />
-        {/* <ForecastWeather /> */}
-        {currentWeatherData !== undefined && <MinuteWeather />}
+      <Stack spacing={2} direction="row">
+        <Stack width={"25%"}>
+          <Search />
+        </Stack>
+        {currentWeatherData !== undefined && (
+          <Stack spacing={2} width={"35%"}>
+            <CurrentWeather />
+            {/* <ForecastWeather /> */}
+            <MinuteWeather />
+          </Stack>
+        )}
       </Stack>
-    </div>
+    </Stack>
   )
 }

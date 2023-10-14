@@ -1,4 +1,4 @@
-import {Button, IconButton, Stack, TextField} from "@mui/material"
+import {Button, Card, IconButton, Stack, TextField} from "@mui/material"
 import {useContext, useEffect, useState} from "react"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import SearchIcon from "@mui/icons-material/Search"
@@ -42,10 +42,10 @@ export const Search: React.FC = () => {
           const filteredArray = existingArray.filter(
             (value: any) => value !== searchValue
           )
-          const updatedArray = [searchValue, ...filteredArray]
+          const updatedArray = [searchValue, ...filteredArray.slice(0, 9)]
           localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
         } else if (searchValue !== "") {
-          const updatedArray = [searchValue, ...existingArray]
+          const updatedArray = [searchValue, ...existingArray.slice(0, 9)]
 
           localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
         }
@@ -72,40 +72,46 @@ export const Search: React.FC = () => {
   }
 
   return (
-    <Stack spacing={1}>
-      <Stack direction="row" spacing={1}>
-        <TextField
-          label="City, St"
-          variant="outlined"
-          value={searchValue}
-          onChange={handleChange}
-          onKeyDown={handleKeyPress}
-        />
-        <Button variant="outlined" onClick={fetchWeatherData}>
-          <SearchIcon />
-        </Button>
-      </Stack>
-      <Stack spacing={1}>
-        {existingArray.map((city: string, index: number) => (
-          <Stack direction="row" key={index}>
-            <Button
-              fullWidth
-              key={index}
-              variant="outlined"
-              onClick={() => handleCityButtonClick(city)}
-            >
-              {city}
-            </Button>
-            <IconButton
-              edge="end"
-              style={{color: "red"}}
-              onClick={() => handleDeleteButtonClick(city)}
-            >
-              <DeleteForeverIcon />
-            </IconButton>
+    <Stack>
+      <Card raised={true}>
+        <Stack padding={1}>
+          <Stack spacing={1}>
+            <Stack direction="row" spacing={1}>
+              <TextField
+                label="City, St"
+                variant="outlined"
+                value={searchValue}
+                onChange={handleChange}
+                onKeyDown={handleKeyPress}
+              />
+              <Button variant="outlined" onClick={fetchWeatherData}>
+                <SearchIcon />
+              </Button>
+            </Stack>
+            <Stack spacing={1}>
+              {existingArray.map((city: string, index: number) => (
+                <Stack direction="row" key={index}>
+                  <Button
+                    fullWidth
+                    key={index}
+                    variant="outlined"
+                    onClick={() => handleCityButtonClick(city)}
+                  >
+                    {city}
+                  </Button>
+                  <IconButton
+                    edge="end"
+                    style={{color: "red"}}
+                    onClick={() => handleDeleteButtonClick(city)}
+                  >
+                    <DeleteForeverIcon />
+                  </IconButton>
+                </Stack>
+              ))}
+            </Stack>
           </Stack>
-        ))}
-      </Stack>
+        </Stack>
+      </Card>
     </Stack>
   )
 }

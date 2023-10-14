@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react"
 import WeatherContext from "../WeatherContext"
-import {Stack, Typography} from "@mui/material"
+import {Card, Stack, Typography} from "@mui/material"
 
 interface CurrentData {
   temp: number
@@ -20,12 +20,17 @@ export const CurrentWeather: React.FC = () => {
   }, [currentWeatherData])
 
   console.log(currentData)
+  console.log(currentWeatherData)
   return (
     <Stack>
-      <Typography>temperature: {currentData?.temp}</Typography>
-      <Typography>Humidity: {currentData?.humidity}</Typography>
-      <Typography>Wind Speed: {currentData?.wind_speed}</Typography>
-      <Typography>UV Index: {currentData?.uvi}</Typography>
+      <Card raised={true}>
+        <Stack padding={1}>
+          <Typography>temperature: {currentData?.temp}</Typography>
+          <Typography>Humidity: {currentData?.humidity}</Typography>
+          <Typography>Wind Speed: {currentData?.wind_speed}</Typography>
+          <Typography>UV Index: {currentData?.uvi}</Typography>
+        </Stack>
+      </Card>
     </Stack>
   )
 }

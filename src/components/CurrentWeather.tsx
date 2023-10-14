@@ -10,7 +10,7 @@ interface CurrentData {
 }
 
 export const CurrentWeather: React.FC = () => {
-  const {currentWeatherData} = useContext(WeatherContext)
+  const {coords, currentWeatherData} = useContext(WeatherContext)
   const [currentData, setCurrentData] = useState<CurrentData>()
 
   useEffect(() => {
@@ -23,6 +23,9 @@ export const CurrentWeather: React.FC = () => {
     <Stack>
       <Card raised={true}>
         <Stack padding={1}>
+          <Typography variant="h5">
+            {coords.city}, {coords.state}
+          </Typography>
           <Typography>
             temperature: {Math.round(currentData?.temp ?? 0)}
           </Typography>

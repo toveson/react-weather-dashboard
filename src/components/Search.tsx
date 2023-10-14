@@ -5,13 +5,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import WeatherContext from "../WeatherContext"
 
 export const Search: React.FC = () => {
-  const {setCurrentWeatherData} = useContext(WeatherContext)
-  const [coords, setCoords] = useState({
-    lat: 0,
-    lon: 0,
-    city: "",
-    state: ""
-  })
+  const {coords, setCoords, setCurrentWeatherData} = useContext(WeatherContext)
   const [searchValue, setSearchValue] = useState<string>("")
   const openWeatherKey = process.env.REACT_APP_WEATHER_API_KEY
 
@@ -45,6 +39,7 @@ export const Search: React.FC = () => {
 
   const fetchWeatherData = () => {
     const {lat, lon} = coords
+
     if (searchValue !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${openWeatherKey}`
@@ -81,6 +76,12 @@ export const Search: React.FC = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        setCoords({
+          lat: data[0].lat,
+          lon: data[0].lon,
+          city: data[0].name,
+          state: data[0].state
+        })
         if (data.length === 1) {
           fetch(
             `https://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=imperial&appid=${openWeatherKey}`

@@ -1,18 +1,24 @@
-import {Button, Card, IconButton, Stack, TextField} from "@mui/material"
 import {useContext, useEffect, useState} from "react"
+import {Button, Card, IconButton, Stack, TextField} from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import SearchIcon from "@mui/icons-material/Search"
 import WeatherContext from "../WeatherContext"
 
 export const Search: React.FC = () => {
   const {setCurrentWeatherData} = useContext(WeatherContext)
+  const [coords, setCoords] = useState({
+    lat: 0,
+    lon: 0,
+    city: "",
+    state: ""
+  })
   const [searchValue, setSearchValue] = useState<string>("")
-  const [lat, setLat] = useState<number>(0)
-  const [lon, setLon] = useState<number>(0)
   const openWeatherKey = process.env.REACT_APP_WEATHER_API_KEY
-  const existingArray = JSON.parse(
-    localStorage.getItem("searchedCities") || "[]"
-  )
+
+  const getExistingArray = () => {
+    return JSON.parse(localStorage.getItem("searchedCities") || "[]")
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
   }
@@ -25,44 +31,84 @@ export const Search: React.FC = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.length === 1) {
-            setLat(data[0].lat)
-            setLon(data[0].lon)
+            setCoords({
+              lat: data[0].lat,
+              lon: data[0].lon,
+              city: data[0].name,
+              state: data[0].state
+            })
           }
         })
     }
-  }, [searchValue, openWeatherKey])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue])
 
   const fetchWeatherData = () => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${openWeatherKey}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (existingArray.includes(searchValue)) {
-          const filteredArray = existingArray.filter(
-            (value: any) => value !== searchValue
-          )
-          const updatedArray = [searchValue, ...filteredArray.slice(0, 9)]
-          localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
-        } else if (searchValue !== "") {
-          const updatedArray = [searchValue, ...existingArray.slice(0, 9)]
-
-          localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
-        }
-        setCurrentWeatherData(data)
-      })
-      .then(() => setSearchValue(""))
+    const {lat, lon} = coords
+    if (searchValue !== "") {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${openWeatherKey}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const existingArray = getExistingArray()
+          if (existingArray.includes(searchValue)) {
+            const filteredArray = existingArray.filter(
+              (value: any) => value !== searchValue
+            )
+            const updatedArray = [searchValue, ...filteredArray.slice(0, 9)]
+            localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
+          } else if (searchValue !== "") {
+            const updatedArray = [searchValue, ...existingArray.slice(0, 9)]
+            localStorage.setItem("searchedCities", JSON.stringify(updatedArray))
+          }
+          setCurrentWeatherData(data)
+        })
+        .then(() => setSearchValue(""))
+    }
   }
 
   const handleDeleteButtonClick = (city: string) => {
+    const existingArray = getExistingArray()
     const filteredArray = existingArray.filter((value: any) => value !== city)
     localStorage.setItem("searchedCities", JSON.stringify(filteredArray))
     window.location.reload()
   }
 
   const handleCityButtonClick = (city: string) => {
-    setSearchValue(city)
-    fetchWeatherData()
+    fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=5&appid=${openWeatherKey}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length === 1) {
+          fetch(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=imperial&appid=${openWeatherKey}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const existingArray = getExistingArray()
+              if (existingArray.includes(city)) {
+                const filteredArray = existingArray.filter(
+                  (value: any) => value !== city
+                )
+                const updatedArray = [city, ...filteredArray.slice(0, 9)]
+                localStorage.setItem(
+                  "searchedCities",
+                  JSON.stringify(updatedArray)
+                )
+              } else if (city !== "") {
+                const updatedArray = [city, ...existingArray.slice(0, 9)]
+                localStorage.setItem(
+                  "searchedCities",
+                  JSON.stringify(updatedArray)
+                )
+              }
+              setCurrentWeatherData(data)
+            })
+            .then(() => setSearchValue(""))
+        }
+      })
   }
 
   const handleKeyPress = (event: any) => {
@@ -89,7 +135,7 @@ export const Search: React.FC = () => {
               </Button>
             </Stack>
             <Stack spacing={1}>
-              {existingArray.map((city: string, index: number) => (
+              {getExistingArray().map((city: string, index: number) => (
                 <Stack direction="row" key={index}>
                   <Button
                     fullWidth

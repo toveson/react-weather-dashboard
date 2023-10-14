@@ -19,15 +19,17 @@ export const CurrentWeather: React.FC = () => {
     }
   }, [currentWeatherData])
 
-  console.log(currentData)
-  console.log(currentWeatherData)
   return (
     <Stack>
       <Card raised={true}>
         <Stack padding={1}>
-          <Typography>temperature: {currentData?.temp}</Typography>
+          <Typography>
+            temperature: {Math.round(currentData?.temp ?? 0)}
+          </Typography>
           <Typography>Humidity: {currentData?.humidity}</Typography>
-          <Typography>Wind Speed: {currentData?.wind_speed}</Typography>
+          <Typography>
+            Wind Speed: {Math.round(currentData?.wind_speed ?? 0)}
+          </Typography>
           <Typography>UV Index: {currentData?.uvi}</Typography>
         </Stack>
       </Card>

@@ -1,7 +1,7 @@
 import {Stack} from "@mui/system"
 import {
   CurrentWeather,
-  // ForecastWeather,
+  ForecastWeather,
   MinuteWeather,
   Search
 } from "../components"
@@ -26,7 +26,7 @@ export const Dashboard: React.FC = (props) => {
         {currentWeatherData !== undefined && (
           <Stack spacing={2} width={"35%"}>
             <CurrentWeather />
-            {/* <ForecastWeather /> */}
+            <ForecastWeather />
             <MinuteWeather />
           </Stack>
         )}

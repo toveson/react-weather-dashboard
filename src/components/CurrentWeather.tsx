@@ -28,12 +28,13 @@ export const CurrentWeather: React.FC = () => {
           </Typography>
           <Typography>
             temperature: {Math.round(currentData?.temp ?? 0)}
+            {"\xB0"}
           </Typography>
           <Typography>Humidity: {currentData?.humidity}</Typography>
           <Typography>
             Wind Speed: {Math.round(currentData?.wind_speed ?? 0)}
           </Typography>
-          <Typography>UV Index: {currentData?.uvi}</Typography>
+          <Typography>UV Index: {Math.round(currentData?.uvi ?? 0)}</Typography>
         </Stack>
       </Card>
     </Stack>

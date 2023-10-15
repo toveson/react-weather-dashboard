@@ -9,6 +9,7 @@ import {
 interface currentWeatherDataType {
   current: object
   minutely: Array<object>
+  daily: Array<object>
 }
 
 interface coordsType {

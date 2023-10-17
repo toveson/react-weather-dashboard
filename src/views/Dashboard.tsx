@@ -24,7 +24,7 @@ export const Dashboard: React.FC = (props) => {
           <Search />
         </Stack>
         {currentWeatherData !== undefined && (
-          <Stack spacing={2} width={"35%"}>
+          <Stack spacing={2}>
             <CurrentWeather />
             <ForecastWeather />
             <MinuteWeather />

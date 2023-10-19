@@ -1,4 +1,4 @@
-# react portfolio
+# react Weather Dashboard
 
 ## Description
 
@@ -13,7 +13,7 @@ A simple site to get weather data for a city that is entered by the use.
 
 ## Table of Contents
 
-- [react portfolio](#react-portfolio)
+- [react Weather Dashboard](#react-weather-dashboard)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Technologies](#technologies)

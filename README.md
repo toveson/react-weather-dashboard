@@ -10,7 +10,7 @@ A simple site to get weather data for a city that is entered by the use.
 * The main reason that I had to build this site was to play around with the useContext hook that is built into react.
 
 
-<!-- Link to live site: [react-portfolio](https://toveson.github.io/react-portfolio/#/) -->
+Link to live site: [Weather Dashboard](https://toveson.github.io/react-weather-dashboard/)
 
 ![Dashboard](./src/img/weather-dashboard.png)
 

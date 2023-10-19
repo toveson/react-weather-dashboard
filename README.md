@@ -1,9 +1,12 @@
-# react Weather Dashboard
+# React Weather Dashboard
 
 ## Description
 
 A simple site to get weather data for a city that is entered by the use.
 * When a city is entered then the current weather and an 8 day forecast is displayed.
+* Searched cities will be saved to local storage and limited to 10 cities.
+* Saved cities will search the city that was clicked.
+* saved cities can be deleted by clicking the trash can icon.
 * The main reason that I had to build this site was to play around with the useContext hook that is built into react.
 
 
@@ -13,7 +16,7 @@ A simple site to get weather data for a city that is entered by the use.
 
 ## Table of Contents
 
-- [react Weather Dashboard](#react-weather-dashboard)
+- [React Weather Dashboard](#react-weather-dashboard)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Technologies](#technologies)

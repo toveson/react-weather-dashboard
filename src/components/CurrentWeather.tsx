@@ -23,7 +23,7 @@ export const CurrentWeather: React.FC = () => {
     <Stack>
       <Card raised={true}>
         <Stack padding={1}>
-          <Typography variant="h5">
+          <Typography variant="h2">
             {coords.city}, {coords.state}
           </Typography>
           <Typography>

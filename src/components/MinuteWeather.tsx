@@ -11,7 +11,7 @@ import {
   Legend
 } from "chart.js"
 import {Line} from "react-chartjs-2"
-import {Card, Stack} from "@mui/material"
+import {Card, Stack, Typography} from "@mui/material"
 
 ChartJS.register(
   CategoryScale,
@@ -75,6 +75,7 @@ export const MinuteWeather: React.FC = () => {
     <Stack>
       <Card raised={true}>
         <Stack padding={1}>
+          <Typography variant="h4">Precipitation Per Minute</Typography>
           <Line options={options} data={chartData} />
         </Stack>
       </Card>

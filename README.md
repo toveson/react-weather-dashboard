@@ -24,7 +24,7 @@ Link to live site: [Weather Dashboard](https://toveson.github.io/react-weather-d
   - [License](#license)
   - [Contributing](#contributing)
   - [Questions](#questions)
-    - [Trever Oveson](#trever-oveson)
+  - [Trever Oveson](#trever-oveson)
 
 ## Technologies
 
@@ -51,7 +51,7 @@ When contributing to this repository, please first discuss the change you wish t
 
 For any questions the author(s) can be contacted at:
 
-### Trever Oveson
+## Trever Oveson
 
 GitHub: [toveson](https://github.com/toveson)
 
